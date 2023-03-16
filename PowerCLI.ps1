@@ -52,5 +52,5 @@ Start-VM -VM $ServerName
 Get-VMGuest $ServerName | Update-Tools
 Remove-OSCustomizationSpec CustSpec
 
-#Copy-VMGuestFile -VM $ServerName -Source C:\Temp\1.txt -Destination C:\Temp\ -LocalToGuest -GuestUser Administrator -GuestPassword 'pa$$w0rd$ibur'
+#Copy-VMGuestFile -VM $ServerName -Source C:\Temp\1.txt -Destination C:\Temp\ -LocalToGuest -GuestUser Administrator -GuestPassword 'pa$$'
 
