@@ -1,0 +1,15 @@
+$Server='s706dc-01'
+$Owner='PersonalData'
+$Task='TSK1397327'
+$Description=$Owner+' '+$Task
+$NameGroup='G706FS-DFS'
+
+Get-ADGroup -Server $Server -Identity $NameGroup -Properties Name, Description | Select Name, Description
+Set-ADGroup -Server $Server -Identity $NameGroup -Description $Description
+
+################ Set Description from csv ################
+Import-CSV -path 'C:\Temp\groups.csv' |
+ForEach-Object {Set-ADGroup -Identity $_.Name -Description ($_.owner+' '+$Task)}
+################ Show result ################
+Import-CSV -path 'C:\Temp\groups.csv' |
+ForEach-Object {Get-ADGroup -Server $Server -Identity $_.name -Properties Name, Description | Select Name, Description}
