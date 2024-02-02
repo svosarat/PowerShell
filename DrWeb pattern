@@ -1,0 +1,11 @@
+$Server="S706SS-DWPX"
+$App = {C:\'Program Files'\DrWeb\es-service.exe "-e $Server"}
+$Log = 'C:\ProgramData\Doctor Web\Logs\es-service.log'
+
+$regvalue = Select-String -Path $Log -Pattern "S001SS"
+if ($regvalue -eq $Null) {Return $False} 
+else {
+Stop-Service DrWebESService
+Set-Content -Path $Log -Value (Get-Content -Path $Log | Select-String -Pattern "S001SS" -NotMatch)
+Invoke-Command -ScriptBlock $App
+}
